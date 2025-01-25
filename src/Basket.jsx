@@ -37,7 +37,7 @@ const Basket = ({ onDropGift, totalItems, droppedCount, styling, setBasketPositi
 
 			// Only allow drop if basket is upside down, delta exceeds threshold, and enough time has passed
 			if (
-				(deltaX > shakeThreshold || deltaY > shakeThreshold) &&
+				(deltaX > shakeThreshold || deltaY > shakeThreshold / 3) &&
 				rotation.get() <= -180 &&
 				currentTime - lastDropTime.current >= 1500 // 2-second delay between drops
 			) {
@@ -93,10 +93,10 @@ const Basket = ({ onDropGift, totalItems, droppedCount, styling, setBasketPositi
 	};
 
 	const handleDragEnd = () => {
-        // Start a timer to fade the tooltip back in after 2 seconds of inactivity
-        timer = setTimeout(() => {
-            setTooltipVisible(true);
-        }, 2000);
+		// Start a timer to fade the tooltip back in after 2 seconds of inactivity
+		timer = setTimeout(() => {
+			setTooltipVisible(true);
+		}, 2000);
 
 		// Animate x, y, and rotation back to their initial values
 		animate(x, 0, { duration: 1 });
